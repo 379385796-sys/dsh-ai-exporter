@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "对话导出",
+    "description": "将 DSH 当前或历史会话导出为 TXT、Markdown 和可搜索 PDF，支持指定轮次、时间及模型信息，方便阅读、整理和跨 AI 使用。"
+  }
+}

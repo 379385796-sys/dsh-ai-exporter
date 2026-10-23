@@ -1,0 +1,3 @@
+- insert:
+    - id: ai-exporter
+      name: dsh-ai-exporter

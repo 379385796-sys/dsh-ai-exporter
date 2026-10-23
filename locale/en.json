@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Conversation Export",
+    "description": "Export current or historical DSH conversations offline as TXT, Markdown, and searchable PDF, with round selection, optional timestamps and model information, native Windows save dialogs, recent folder memory, and rewound content filtering. Chat content is not uploaded."
+  }
+}

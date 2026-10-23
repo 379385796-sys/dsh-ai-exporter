@@ -1,0 +1,76 @@
+[
+  {
+    "name": "markdown-it",
+    "version": "14.1.0",
+    "license": "MIT",
+    "notices": [
+      "LICENSE"
+    ]
+  },
+  {
+    "name": "argparse",
+    "version": "2.0.1",
+    "license": "Python-2.0",
+    "notices": [
+      "LICENSE"
+    ]
+  },
+  {
+    "name": "entities",
+    "version": "4.5.0",
+    "license": "BSD-2-Clause",
+    "notices": [
+      "LICENSE"
+    ]
+  },
+  {
+    "name": "linkify-it",
+    "version": "5.0.2",
+    "license": "MIT",
+    "notices": [
+      "LICENSE"
+    ]
+  },
+  {
+    "name": "uc.micro",
+    "version": "2.1.0",
+    "license": "MIT",
+    "notices": [
+      "LICENSE.txt"
+    ]
+  },
+  {
+    "name": "mdurl",
+    "version": "2.1.0",
+    "license": "MIT",
+    "notices": [
+      "LICENSE"
+    ]
+  },
+  {
+    "name": "punycode.js",
+    "version": "2.3.1",
+    "license": "MIT",
+    "notices": [
+      "LICENSE-MIT.txt"
+    ]
+  },
+  {
+    "name": "highlight.js",
+    "version": "11.11.1",
+    "license": "BSD-3-Clause",
+    "notices": [
+      "LICENSE"
+    ]
+  },
+  {
+    "name": "playwright-core",
+    "version": "1.56.1",
+    "license": "Apache-2.0",
+    "notices": [
+      "LICENSE",
+      "NOTICE",
+      "ThirdPartyNotices.txt"
+    ]
+  }
+]

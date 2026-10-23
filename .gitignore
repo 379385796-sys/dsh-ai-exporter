@@ -1,0 +1,16 @@
+node_modules/
+dist/
+artifacts/
+coverage/
+.cache/
+.test-home/
+test/tmp*/
+.env
+.env.*
+!.env.example
+*.log
+*.private.*
+*.jsonl
+*.zstd
+*.zip
+*.tgz

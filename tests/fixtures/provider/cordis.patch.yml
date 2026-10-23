@@ -1,0 +1,3 @@
+- insert:
+    - id: exporter-test-provider
+      name: dsh-exporter-test-provider

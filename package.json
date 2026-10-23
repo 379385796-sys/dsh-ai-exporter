@@ -1,0 +1,78 @@
+{
+  "name": "dsh-ai-exporter",
+  "version": "0.1.1",
+  "type": "module",
+  "license": "MIT",
+  "description": "离线导出 DSH 当前或历史对话为 TXT、Markdown 和可搜索 PDF，支持轮次筛选、Windows 原生保存、最近目录记忆和撤回过滤，不上传聊天正文。",
+  "main": "lib/index.js",
+  "bin": {
+    "dsh-ai-exporter": "lib/cli.js"
+  },
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./core": "./lib/core.js",
+    "./renderers": "./lib/renderers.js",
+    "./package.json": "./package.json",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "icon": "./icon.svg",
+  "files": [
+    "lib",
+    "locale",
+    "icon.svg",
+    "cordis.patch.yml",
+    "README.md",
+    "README.en.md",
+    "CHANGELOG.md",
+    "docs/COMPATIBILITY.md",
+    "LICENSE",
+    "THIRD_PARTY_NOTICES.md",
+    "assets/*.png"
+  ],
+  "engines": {
+    "node": ">=22",
+    "dsh": "0.2.1-rc.2"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-conversation",
+        "@deepseek-ai/dsh-client-ui-slots"
+      ],
+      "platform": "web"
+    }
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "check": "npm run build && npm test",
+    "pack:release": "node scripts/pack-release.mjs"
+  },
+  "dependencies": {
+    "markdown-it": "14.1.0",
+    "highlight.js": "11.11.1",
+    "playwright-core": "1.56.1"
+  },
+  "devDependencies": {
+    "esbuild": "0.25.12",
+    "react": "18.3.1"
+  },
+  "packageManager": "pnpm@11.28.5",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/379385796-sys/dsh-ai-exporter.git"
+  },
+  "homepage": "https://github.com/379385796-sys/dsh-ai-exporter#readme",
+  "bugs": {
+    "url": "https://github.com/379385796-sys/dsh-ai-exporter/issues"
+  },
+  "keywords": [
+    "deepseek-harness",
+    "dsh-plugin"
+  ]
+}
