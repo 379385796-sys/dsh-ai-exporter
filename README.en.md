@@ -1,5 +1,11 @@
 # Conversation Export (dsh-ai-exporter)
 
+## 0.1.2 compatibility maintenance (2026-10-25)
+
+Explicit host range: `0.2.1-rc.2 || 0.2.1-rc.3`. Target: Windows Desktop 0.2.1-rc.3, Electron 44.7.0, Node 24.21.0. The exact host range omitted RC3. Add RC3 explicitly; keep the existing exporter implementation and privacy, native-save and PDF temporary-directory behavior.
+
+Validated on an isolated real RC3 host, including coexistence with Packer 0.4.2, lifecycle, settings and persistence. The human user completed actual Desktop GUI acceptance; 70 automated regressions passed; native save, searchable Chinese PDF and round-2-only exported content were independently verified. Prior RC2 declarations and automated tests remain; full RC2 Desktop retesting in this maintenance is NOT TESTED. See [compatibility](docs/COMPATIBILITY.md).
+
 [简体中文](README.md)
 
 Export current or historical DSH conversations as TXT, Markdown, and searchable PDF.
@@ -8,7 +14,7 @@ An independently maintained DSH integration. Third-party code retains its own at
 
 ## Compatibility and status
 
-Version **0.1.1**. Tested on Windows with DSH Desktop **0.2.1-rc.2**. Other platforms are untested. 
+Version **0.1.2**. Current target: Windows DSH Desktop **0.2.1-rc.3**. Prior RC2 support and automated coverage remain; full RC2 Desktop retesting this maintenance is NOT TESTED. Other platforms are untested.
 
 Choose the destination in the native Windows dialog. The initial location is the current user home; saved recent directories are retained. PDF uses the system temporary directory or DSH_EXPORTER_TEMP, without a drive-letter restriction. Unknown events, unfinished replies and unsupported content block export by default; explicitly allowing partial export retains diagnostics. Attachments are referenced, never read or embedded; math and Mermaid remain source text. This is not a lossless session archive.
 

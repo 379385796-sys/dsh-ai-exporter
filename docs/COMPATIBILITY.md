@@ -19,3 +19,11 @@ Choose the destination in the native Windows dialog. The initial location is the
 - Actual isolated host UI in headless Edge: Chinese/English metadata/icons, light/dark icons, official disable/enable and restart: PASS.
 - The test Profile has no connection to the maintainer source directory; package dependencies resolve from its own installation.
 - No second physical machine/VM, actual C-drive file creation, or manual native dialog click-through is claimed.
+
+## 0.1.2 — 2026-10-25
+
+Installed target verified from immutable app.asar metadata: DSH and Shell 0.2.1-rc.3; Shell commit be72761ee1a6736ebcdf4f3739363b083ae53c98; Electron 44.7.0, Node 24.21.0, ABI 149.
+
+Extend the explicit host range to RC3 after inspecting the installed runtime. Retain exporter routes, privacy filters, native destinations and DSH_EXPORTER_TEMP behavior.
+
+70 automated regressions passed; native save, searchable Chinese PDF and round-2-only exported content were independently verified. All three maintained plugins coexist with Packer 0.4.2 in an isolated RC3 Profile; the final headless Web-host pass has no page, console or HTTP errors. The human user completed actual Desktop GUI checks. Headless and Desktop results are recorded separately. No compatibility exemption was used. Prior RC2 support remains; full RC2 Desktop retesting this maintenance is NOT TESTED.

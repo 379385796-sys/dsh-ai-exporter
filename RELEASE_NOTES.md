@@ -1,7 +1,9 @@
-# dsh-ai-exporter v0.1.1
+# dsh-ai-exporter 0.1.2
 
-Remove maintainer-specific export/PDF temporary paths. Choose a local Windows destination through the native dialog; existing saved preferences remain valid. System temporary directories are accepted on any drive. TXT, Markdown, searchable PDF, historical sessions and round selection remain available.
+The exact host range omitted RC3. Add RC3 explicitly; keep the existing exporter implementation and privacy, native-save and PDF temporary-directory behavior.
 
-修复跨机器默认路径与 PDF 临时目录策略。保留原生位置授权、已有偏好、禁止覆盖和诊断机制；未知事件及未完成内容默认拒绝导出，部分导出需要明确选择，附件仅保留说明。
+No new features or core/Shell changes. Host range: 0.2.1-rc.2 || 0.2.1-rc.3.
 
-Windows / DSH Desktop 0.2.1-rc.2 only; other platforms untested. Download tgz and verify SHA-256 before using the official plugin installer. No user data, backup, or browser binary is included.
+Validation: real installed RC3 runtime, isolated official tgz installation, enable/disable/reload, settings persistence, coexistence with Packer 0.4.2, and human Desktop GUI acceptance. 70 automated regressions passed; native save, searchable Chinese PDF and round-2-only exported content were independently verified. RC2 automated coverage remains; full RC2 Desktop retest this maintenance is NOT TESTED.
+
+MIT licenses and third-party notices retained.

@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.2 — 2026-10-25
+
+- Extend the explicit host range to RC3 after inspecting the installed runtime. Retain exporter routes, privacy filters, native destinations and DSH_EXPORTER_TEMP behavior.
+- Retain prior host declarations and data formats; no new features.
+- Real RC3 host and human Desktop acceptance passed; retain RC2 automated regression, with full RC2 Desktop retest NOT TESTED.
+
 ## 0.1.1
 
 - Remove maintainer-specific default export and PDF temporary paths; preserve saved destination preferences.
