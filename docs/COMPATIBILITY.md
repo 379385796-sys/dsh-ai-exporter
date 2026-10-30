@@ -27,3 +27,9 @@ Installed target verified from immutable app.asar metadata: DSH and Shell 0.2.1-
 Extend the explicit host range to RC3 after inspecting the installed runtime. Retain exporter routes, privacy filters, native destinations and DSH_EXPORTER_TEMP behavior.
 
 70 automated regressions passed; native save, searchable Chinese PDF and round-2-only exported content were independently verified. All three maintained plugins coexist with Packer 0.4.2 in an isolated RC3 Profile; the final headless Web-host pass has no page, console or HTTP errors. The human user completed actual Desktop GUI checks. Headless and Desktop results are recorded separately. No compatibility exemption was used. Prior RC2 support remains; full RC2 Desktop retesting this maintenance is NOT TESTED.
+
+## 0.1.3 — rc.5 maintenance (2026-10-30)
+
+Target: DSH Desktop 0.2.1-rc.5, Windows x64, Electron 44.7.0 / Node 24.21.0 / ABI 149. Exact host range: `0.2.1-rc.2 || 0.2.1-rc.3 || 0.2.1-rc.5`. Preserve sessionQuery replay, TXT/Markdown/PDF rendering, native destination grants and temporary resource handling. No functional code changes.
+
+Core behavior is checked on an isolated rc.5 Host/browser with synthetic sessions and deterministic offline model output, followed by three-plugin coexistence and the unchanged Packer 0.4.3 candidate dependency precheck. Earlier RC2/RC3 evidence remains; those full Desktop GUI checks are not repeated here. No formal Profile or DSH core modification.

@@ -1,5 +1,9 @@
 # Conversation Export (dsh-ai-exporter)
 
+## 0.1.3 rc.5 compatibility maintenance (2026-10-30)
+
+Host range: `0.2.1-rc.2 || 0.2.1-rc.3 || 0.2.1-rc.5`. Declaration-only maintenance after checking the used interfaces; no feature, UI or data-format change. Validation targets an isolated Windows rc.5 Host and browser. Formal installation is a separate stage. Older sections below are historical records.
+
 ## 0.1.2 compatibility maintenance (2026-10-25)
 
 Explicit host range: `0.2.1-rc.2 || 0.2.1-rc.3`. Target: Windows Desktop 0.2.1-rc.3, Electron 44.7.0, Node 24.21.0. The exact host range omitted RC3. Add RC3 explicitly; keep the existing exporter implementation and privacy, native-save and PDF temporary-directory behavior.
@@ -14,7 +18,7 @@ An independently maintained DSH integration. Third-party code retains its own at
 
 ## Compatibility and status
 
-Version **0.1.2**. Current target: Windows DSH Desktop **0.2.1-rc.3**. Prior RC2 support and automated coverage remain; full RC2 Desktop retesting this maintenance is NOT TESTED. Other platforms are untested.
+Version **0.1.3**. Current target: Windows DSH Desktop **0.2.1-rc.5**. Prior RC2 support and automated coverage remain; full RC2 Desktop retesting this maintenance is NOT TESTED. Other platforms are untested.
 
 Choose the destination in the native Windows dialog. The initial location is the current user home; saved recent directories are retained. PDF uses the system temporary directory or DSH_EXPORTER_TEMP, without a drive-letter restriction. Unknown events, unfinished replies and unsupported content block export by default; explicitly allowing partial export retains diagnostics. Attachments are referenced, never read or embedded; math and Mermaid remain source text. This is not a lossless session archive.
 

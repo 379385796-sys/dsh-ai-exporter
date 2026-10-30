@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.3 — 2026-10-30
+
+- Add DSH Desktop 0.2.1-rc.5 explicitly to the verified host range; retain previous supported versions.
+- Preserve sessionQuery replay, TXT/Markdown/PDF rendering, native destination grants and temporary resource handling. No functional code changes.
+- Validation scope: isolated Windows rc.5 Host and browser, core plugin behavior and three-plugin coexistence; no formal installation or publication in this stage.
+
 ## 0.1.2 — 2026-10-25
 
 - Extend the explicit host range to RC3 after inspecting the installed runtime. Retain exporter routes, privacy filters, native destinations and DSH_EXPORTER_TEMP behavior.
