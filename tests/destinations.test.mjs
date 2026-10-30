@@ -1,5 +1,17 @@
-import {homedir} from 'node:os';import test from 'node:test';import assert from 'node:assert/strict';import {DestinationGrants,assertLocalPath} from '../lib/destinations.js';
+import {homedir} from 'node:os';import test from 'node:test';import assert from 'node:assert/strict';import {DestinationGrants,assertLocalPath,normalizeDirectoryInput} from '../lib/destinations.js';
 const root='D:\\outside-workspace\\中文 空格',base={sessionId:'s',formats:['txt'],title:'test'};
+test('manual input normalizes quoted pasted paths and rejects illegal or excessive paths',()=>{
+ assert.equal(normalizeDirectoryInput('  "D:/导出/子目录/../中文 空格"  '),'D:\\导出\\中文 空格');
+ for(const p of ['D:relative','D:\\bad|name','D:\\dir:stream','D:\\NUL.txt','D:\\ends.\\child','D:\\'+'a'.repeat(240)])assert.throws(()=>normalizeDirectoryInput(p));
+});
+test('strict typed directory fails closed before picker; folderOnly retains single-format folder authorization',async()=>{
+ let picks=0;const d=new DestinationGrants({picker:async r=>{picks++;assert.equal(r.mode,'folder');return root;},validateDirectory:async p=>{if(p.endsWith('missing'))throw Error('ENOENT');if(p.endsWith('denied'))throw Error('EACCES');return p;}});
+ for(const value of ['D:\\missing','D:\\denied','D:\\invalid?'])await assert.rejects(d.choose({...base,initialDirectory:value,strictInitialDirectory:true,folderOnly:true}));
+ assert.equal(picks,0);assert.equal(d.grants.size,0);const r=await d.choose({...base,initialDirectory:root,strictInitialDirectory:true,folderOnly:true});assert.equal(r.mode,'folder');assert.equal(d.consume(r.grant,'s',['txt']).outputDir,root);
+});
+test('selected folder with excessive full filename grants no write permission',async()=>{
+ const d=new DestinationGrants({picker:async()=> 'D:\\'+'a'.repeat(225),validateDirectory:async p=>p});await assert.rejects(d.choose({...base,folderOnly:true}),/过长/);assert.equal(d.grants.size,0);
+});
 test('destination grants bind real chooser result to formats/session and are single-use',async()=>{let request;const d=new DestinationGrants({picker:async value=>{request=value;return root+'\\custom.txt';},validateDirectory:async path=>path});const chosen=await d.choose({...base,initialDirectory:root});assert.equal(request.mode,'file');assert.equal(chosen.directory,root);assert.equal(d.consume(chosen.grant,'s',['txt']).fileStem,'custom');assert.throws(()=>d.consume(chosen.grant,'s',['txt']),/失效/);});
 test('multi-format folder chooser, cancellation and retry do not authorize client-supplied paths',async()=>{let count=0;const d=new DestinationGrants({picker:async request=>{assert.equal(request.mode,'folder');return count++?root:null;},validateDirectory:async p=>p});const request={...base,formats:['md','pdf']};assert.deepEqual(await d.choose(request),{cancelled:true});assert.equal(d.grants.size,0);const chosen=await d.choose(request);assert.throws(()=>d.consume(chosen.grant,'other',['md','pdf']),/会话/);assert.throws(()=>d.consume(chosen.grant,'s',['txt']),/格式/);assert.equal(d.consume(chosen.grant,'s',['pdf','md']).outputDir,root);});
 test('chooser errors, expiry, extension mismatch and invalid local paths fail closed',async()=>{let now=0;const d=new DestinationGrants({now:()=>now,picker:async()=>root+'\\a.txt',validateDirectory:async p=>p});const chosen=await d.choose(base);now=300001;assert.throws(()=>d.consume(chosen.grant,'s',['txt']),/失效/);await assert.rejects(d.choose({...base,formats:['pdf']}),/扩展名/);for(const path of ['../relative','https://evil/a',String.raw`\\server\share`])assert.throws(()=>assertLocalPath(path));const bad=new DestinationGrants({picker:async()=>{throw Error('picker failed');}});await assert.rejects(bad.choose(base),/picker failed/);assert.equal(bad.picking,false);});

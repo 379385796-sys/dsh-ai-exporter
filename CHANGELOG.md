@@ -2,6 +2,15 @@
 
 ## 0.1.3 — 2026-10-30
 
+### Unpublished UI candidate revision — 2026-10-31
+
+- Group conversation scope, export options, destination and actions; inherit host semantic colors and text sizing. Keep detailed diagnostics collapsed.
+- Allow typed or pasted local directories, normalized and confirmed through the existing single-use native grants. Reject invalid, unavailable or excessive paths without silently exporting elsewhere.
+- Use the standard Windows Shell folder picker with an editable address bar; retain single-format Save As, cancellation and exclusive no-overwrite writes.
+- Keep export engines, PDF worker, conversation reader and privacy filters unchanged. Earlier frozen 0.1.3 packages remain distinct candidates with distinct checksums.
+
+### rc.5 declaration maintenance
+
 - Add DSH Desktop 0.2.1-rc.5 explicitly to the verified host range; retain previous supported versions.
 - Preserve sessionQuery replay, TXT/Markdown/PDF rendering, native destination grants and temporary resource handling. No functional code changes.
 - Validation scope: isolated Windows rc.5 Host and browser, core plugin behavior and three-plugin coexistence; no formal installation or publication in this stage.

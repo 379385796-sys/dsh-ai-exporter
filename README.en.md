@@ -1,5 +1,9 @@
 # Conversation Export (dsh-ai-exporter)
 
+## Unpublished 0.1.3 UI revision (2026-10-31)
+
+The dialog groups scope, options, destination and actions. Type or paste a local Windows folder, or browse with the standard Shell picker and address bar. Typed folders still require explicit native confirmation using the existing one-use destination grant. Invalid or unavailable input blocks export rather than silently choosing another directory. Single-format Save As and folded diagnostics remain available. Export/PDF engines and privacy filters are unchanged. Older declaration-only notes below describe the preceding candidate.
+
 ## 0.1.3 rc.5 compatibility maintenance (2026-10-30)
 
 Host range: `0.2.1-rc.2 || 0.2.1-rc.3 || 0.2.1-rc.5`. Declaration-only maintenance after checking the used interfaces; no feature, UI or data-format change. Validation targets an isolated Windows rc.5 Host and browser. Formal installation is a separate stage. Older sections below are historical records.
