@@ -4,6 +4,7 @@
 
 ### Unpublished UI candidate revision — 2026-10-31
 
+- Follow-up: style the conversation-header entry as a compact, quiet icon/text toolbar button; remove the browser-default form-button appearance. Dialog, routes and export engine are unchanged by this follow-up.
 - Group conversation scope, export options, destination and actions; inherit host semantic colors and text sizing. Keep detailed diagnostics collapsed.
 - Allow typed or pasted local directories, normalized and confirmed through the existing single-use native grants. Reject invalid, unavailable or excessive paths without silently exporting elsewhere.
 - Use the standard Windows Shell folder picker with an editable address bar; retain single-format Save As, cancellation and exclusive no-overwrite writes.

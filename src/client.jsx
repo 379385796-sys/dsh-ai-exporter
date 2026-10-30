@@ -60,7 +60,7 @@ export function ExportPanel({sessionId}) {
   }
   async function cancel(){if(!job.current)return;setStatus('正在等待安全取消…');try{await api('job?id='+job.current,{method:'DELETE'});}catch(e){setError(e.message);}}
   const disabled=busy||reading||!t||!formats.length||(!t.complete&&!partial);
-  return <><style>{EXPORT_STYLES}</style><button ref={trigger} type="button" className="dse-trigger" disabled={!sessionId} onClick={()=>{setOpen(true);void load();}}>导出对话</button>
+  return <><style>{EXPORT_STYLES}</style><button ref={trigger} type="button" className="dse-trigger" disabled={!sessionId} onClick={()=>{setOpen(true);void load();}}><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M12 3v12m-4-4 4 4 4-4M5 15v5h14v-5"/></svg><span>导出对话</span></button>
     {open&&<div className="dse-backdrop" onMouseDown={e=>{if(e.target===e.currentTarget&&!busy)setOpen(false);}}>
       <section ref={panel} className="dse-dialog" role="dialog" aria-modal="true" aria-labelledby={titleId} aria-label="DSH AI Exporter" tabIndex={-1}>
         <header className="dse-header"><div><h2 id={titleId}>导出对话 <span>AI Exporter</span></h2><p>保留可恢复正文，排除隐藏推理与内部上下文。</p></div><button type="button" className="dse-icon" aria-label="关闭导出" disabled={busy} onClick={()=>setOpen(false)}>×</button></header>
