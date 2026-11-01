@@ -1,47 +1,81 @@
-# Conversation Export (dsh-ai-exporter)
+# DSH AI Exporter
 
-## Unpublished 0.1.3 UI revision (2026-10-31)
+[简体中文](README.md) · [Download v0.1.3](https://github.com/379385796-sys/dsh-ai-exporter/releases/tag/v0.1.3) · [Compatibility](docs/COMPATIBILITY.md)
 
-The dialog groups scope, options, destination and actions. Type or paste a local Windows folder, or browse with the standard Shell picker and address bar. Typed folders still require explicit native confirmation using the existing one-use destination grant. Invalid or unavailable input blocks export rather than silently choosing another directory. Single-format Save As and folded diagnostics remain available. Export/PDF engines and privacy filters are unchanged. Older declaration-only notes below describe the preceding candidate.
+Export current or historical DSH conversations as **TXT, Markdown, and searchable PDF** for local reading and reference. Conversion runs locally without uploading conversation text.
 
-## 0.1.3 rc.5 compatibility maintenance (2026-10-30)
+## Features
 
-Host range: `0.2.1-rc.2 || 0.2.1-rc.3 || 0.2.1-rc.5`. Declaration-only maintenance after checking the used interfaces; no feature, UI or data-format change. Validation targets an isolated Windows rc.5 Host and browser. Formal installation is a separate stage. Older sections below are historical records.
+- Export the current conversation or select a historical session in the panel.
+- Keep all rounds or select ranges such as `1-3,5`.
+- Select one or more formats and choose whether to show timestamps and model information.
+- Type, paste, or browse a local folder and confirm through a native Windows dialog. Retain the recent directory and use Save As for a single format. Existing files are never overwritten.
+- Filter internal content and recognized rewind events. Unknown events and unfinished replies produce diagnostics and block incomplete export by default.
 
-## 0.1.2 compatibility maintenance (2026-10-25)
+Attachments are described, never read or embedded. Math and Mermaid remain source text; lossless rendering is not promised. Exported files cannot restore a DSH environment.
 
-Explicit host range: `0.2.1-rc.2 || 0.2.1-rc.3`. Target: Windows Desktop 0.2.1-rc.3, Electron 44.7.0, Node 24.21.0. The exact host range omitted RC3. Add RC3 explicitly; keep the existing exporter implementation and privacy, native-save and PDF temporary-directory behavior.
+## Installation
 
-Validated on an isolated real RC3 host, including coexistence with Packer 0.4.2, lifecycle, settings and persistence. The human user completed actual Desktop GUI acceptance; 70 automated regressions passed; native save, searchable Chinese PDF and round-2-only exported content were independently verified. Prior RC2 declarations and automated tests remain; full RC2 Desktop retesting in this maintenance is NOT TESTED. See [compatibility](docs/COMPATIBILITY.md).
+Current version: **0.1.3**, targeting Windows DSH Desktop. The package declares `0.2.1-rc.2 || 0.2.1-rc.3 || 0.2.1-rc.5` and Node **22+**. See [compatibility](docs/COMPATIBILITY.md) for current RC5 and historical RC2/RC3 evidence. Other platforms are untested.
 
-[简体中文](README.md)
+**PDF requires an existing Edge or Chrome installation.** No browser is bundled or automatically downloaded. If detection fails, set `DSH_EXPORTER_BROWSER` to a Chromium/Chrome executable's absolute path in the environment that starts DSH. TXT and Markdown do not require the PDF browser.
 
-Export current or historical DSH conversations as TXT, Markdown, and searchable PDF.
+1. Download `dsh-ai-exporter-0.1.3.tgz` and its `.sha256` from [v0.1.3](https://github.com/379385796-sys/dsh-ai-exporter/releases/tag/v0.1.3). Source code ZIP is not the installable package.
+2. Compare the local SHA-256 with the supplied checksum:
 
-An independently maintained DSH integration. Third-party code retains its own attribution and license.
+   ```powershell
+   Get-FileHash -Algorithm SHA256 -LiteralPath '<absolute-tgz-path>'
+   ```
 
-## Compatibility and status
+3. Install the local tgz through DSH's plugin manager, or replace the placeholders with a configured DSH CLI:
 
-Version **0.1.3**. Current target: Windows DSH Desktop **0.2.1-rc.5**. Prior RC2 support and automated coverage remain; full RC2 Desktop retesting this maintenance is NOT TESTED. Other platforms are untested.
+   ```text
+   dsh plugin --profile <profile> add <absolute-tgz-path>
+   ```
 
-Choose the destination in the native Windows dialog. The initial location is the current user home; saved recent directories are retained. PDF uses the system temporary directory or DSH_EXPORTER_TEMP, without a drive-letter restriction. Unknown events, unfinished replies and unsupported content block export by default; explicitly allowing partial export retains diagnostics. Attachments are referenced, never read or embedded; math and Mermaid remain source text. This is not a lossless session archive.
+4. Restart DSH and verify package `dsh-ai-exporter`, entry ID `ai-exporter`, and version `0.1.3`.
 
-## Install, use, and uninstall
+Keep configuration and the previous package before upgrading. Use the official installer without editing installed dependencies or host archives.
 
-Download the prebuilt tgz from Releases, verify its SHA-256, and select it in the official plugin manager, or use `dsh plugin --profile <profile> add <absolute-tgz-path>`. Restart DSH and verify the plugin ID and version. Back up your configuration before updating. To uninstall, use the official manager or `dsh plugin --profile <profile> remove dsh-ai-exporter`. Do not edit node_modules or app.asar. Removing the plugin does not erase existing exports, history, or retained preferences.
+## First export
 
-Use Export Conversation in the conversation header. Select formats, rounds, and timestamp/model display, then choose a destination in the native Windows dialog.
+1. Click Export Conversation in the conversation header and select the current or a historical session.
+2. Choose formats. Leave rounds empty for all, or enter `2` for round 2 only.
+3. Adjust timestamps and model information. Review diagnostics before explicitly allowing a partial export.
+4. Enter an existing local folder or browse, then confirm in the native dialog. A single format also offers Save As.
+5. Wait for completion and open the resulting file path.
 
-## Development and troubleshooting
+Typed directories still need native confirmation; invalid directories block export. Destination grants are single-use and must be renewed after session, format, or path changes. Only local absolute Windows paths are accepted; UNC/network paths are unsupported.
 
-Use Node.js 22+, configure your local cache and temporary directories, then run `pnpm install --frozen-lockfile --ignore-scripts` and `npm run check`. Exporter’s native WinForms helper requires the existing Windows .NET Framework C# compiler. Prebuilt runtime files are included; installation requires no build-time script. Verify host version, Profile selection, checksums, and import errors before troubleshooting. Do not disable safety checks or overwrite host files. See [validation scope](docs/COMPATIBILITY.md).
+## FAQ
 
-## License
+**PDF fails but TXT works.** Check the installed browser and `DSH_EXPORTER_BROWSER`, then temporary-directory permissions. PDF uses the system temporary directory or `DSH_EXPORTER_TEMP` set before starting DSH. Point to the executable, not the browser installer.
 
-See LICENSE and the retained third-party notices.
+**Why is partial-export permission required?** Unknown events, unsupported content, or unfinished replies may leave gaps. Export stops by default; explicitly continuing retains diagnostics. Wait for replies to finish and inspect important exports.
 
-## Plugin manager
+**Are attachments and diagrams preserved?** Attachments remain descriptions; math and Mermaid remain source text. Rendering identical to the host is not promised.
 
-![中文](assets/manager-zh.png)
+**How do I uninstall?** Use the manager or `dsh plugin --profile <profile> remove dsh-ai-exporter`. Manage exports separately. Uninstalling does not erase conversation history or guarantee removal of recent-directory preferences.
 
-![English](assets/manager-en.png)
+## Development and dependencies
+
+Prebuilt tgz installation needs no local build. The repository includes `lib/`. Runtime dependencies are `markdown-it`, `highlight.js`, and `playwright-core`; browser React comes from DSH. The other three DSH plugins are not required.
+
+Development requires Node.js 22+, the repository's declared pnpm, and the existing Windows .NET Framework C# compiler for the native WinForms helper. Configure caches, temporary directories, and the pnpm store, then run:
+
+```text
+pnpm install --frozen-lockfile --ignore-scripts
+npm run check
+```
+
+See [package.json](package.json), [lockfile](pnpm-lock.yaml), [validation scope](docs/COMPATIBILITY.md), and [changelog](CHANGELOG.md).
+
+## Interface and license
+
+This existing manager card identifies the plugin; it does not show the export panel:
+
+![English plugin manager card](assets/manager-en.png)
+
+Suggested future additions: a redacted export-panel screenshot and a searchable Chinese PDF example, labeled with the actual host version.
+
+An independently maintained DSH integration. See [MIT license](LICENSE) and [third-party notices](THIRD_PARTY_NOTICES.md) for reused code and dependency attribution.

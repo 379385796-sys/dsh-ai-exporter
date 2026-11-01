@@ -2,7 +2,9 @@
 
 ## 0.1.3 — 2026-10-30
 
-### Unpublished UI candidate revision — 2026-10-31
+### UI revision — 2026-10-31 (development record)
+
+The UI described below is included in the [published v0.1.3 source snapshot](https://github.com/379385796-sys/dsh-ai-exporter/releases/tag/v0.1.3). “Candidate” in older records refers to development-stage validation.
 
 - Follow-up: style the conversation-header entry as a compact, quiet icon/text toolbar button; remove the browser-default form-button appearance. Dialog, routes and export engine are unchanged by this follow-up.
 - Group conversation scope, export options, destination and actions; inherit host semantic colors and text sizing. Keep detailed diagnostics collapsed.
