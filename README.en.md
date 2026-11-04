@@ -16,7 +16,7 @@ Attachments are described, never read or embedded. Math and Mermaid remain sourc
 
 ## Installation
 
-Current version: **0.1.3**, targeting Windows DSH Desktop. The package declares `0.2.1-rc.2 || 0.2.1-rc.3 || 0.2.1-rc.5` and Node **22+**. See [compatibility](docs/COMPATIBILITY.md) for current RC5 and historical RC2/RC3 evidence. Other platforms are untested.
+Current version: **0.1.4**, targeting Windows DSH Desktop. The package declares `0.2.1-rc.2 || 0.2.1-rc.3 || 0.2.1-rc.5 || 0.2.2-rc.1` and Node **22+**. See [compatibility](docs/COMPATIBILITY.md) for current 0.2.2-rc.1 and historical RC5/RC2/RC3 evidence. Other platforms are untested.
 
 **PDF requires an existing Edge or Chrome installation.** No browser is bundled or automatically downloaded. If detection fails, set `DSH_EXPORTER_BROWSER` to a Chromium/Chrome executable's absolute path in the environment that starts DSH. TXT and Markdown do not require the PDF browser.
 

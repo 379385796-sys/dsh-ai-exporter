@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.4 — 2026-11-05
+
+### DSH 0.2.2-rc.1 compatibility
+
+- Add DSH Desktop **0.2.2-rc.1** to the verified host range; earlier versions retained.
+- DSH 0.2.2-rc.1 refuses to load plugins whose `engines.dsh` does not name the running version, so 0.1.3 was skipped at boot on that host. This release is the load-compatible declaration, not a workaround.
+- Verified on the real 0.2.2-rc.1 host: the session V4 reader, `sessionQuery.readSession`/`listSessions`, the exact `/api/ai-exporter.*` Fetch routes, TXT/Markdown/searchable-PDF output, round filtering, exclusive no-overwrite writes and single-use destination grants all behave as before. No engine, renderer or UI code changed.
+- 73 automated regressions pass; no functional diff outside `package.json` and documentation.
+
 ## 0.1.3 — 2026-10-30
 
 ### UI revision — 2026-10-31 (development record)

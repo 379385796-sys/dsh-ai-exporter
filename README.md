@@ -16,7 +16,7 @@
 
 ## 安装
 
-当前版本 **0.1.3**，面向 Windows DSH Desktop。包声明接受 `0.2.1-rc.2 || 0.2.1-rc.3 || 0.2.1-rc.5`，Node 要求 **22+**。当前 RC5、历史 RC2/RC3 验证的区别见[兼容记录](docs/COMPATIBILITY.md)；其他平台未验证。
+当前版本 **0.1.4**，面向 Windows DSH Desktop。包声明接受 `0.2.1-rc.2 || 0.2.1-rc.3 || 0.2.1-rc.5 || 0.2.2-rc.1`，Node 要求 **22+**。当前 0.2.2-rc.1、历史 RC5/RC2/RC3 验证的区别见[兼容记录](docs/COMPATIBILITY.md)；其他平台未验证。
 
 **PDF 另需本机已有的 Edge 或 Chrome。** 插件不附带或自动下载浏览器。找不到浏览器时，可在启动 DSH 的环境中设置 `DSH_EXPORTER_BROWSER` 为 Chromium/Chrome 可执行文件的完整路径。TXT、Markdown 不依赖 PDF 浏览器。
 

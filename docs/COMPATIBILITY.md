@@ -2,11 +2,27 @@
 
 ## 当前范围 / Current scope
 
-- Package **0.1.3** declares DSH `0.2.1-rc.2 || 0.2.1-rc.3 || 0.2.1-rc.5`; Node **22+**.
-- Current published target: Windows x64 DSH Desktop **0.2.1-rc.5**. See [v0.1.3 Release](https://github.com/379385796-sys/dsh-ai-exporter/releases/tag/v0.1.3). Source baseline: `5aa94cb55250d5b9cade4123702be2dee5f24dd5`.
-- 声明接受范围不等于每个版本、平台及第三方组合都完成同等验收。下面的 RC2/RC3 测试数量与安装状态是对应日期的历史记录；本轮仅检查文档，没有重新运行功能或桌面验收。
-- Declared ranges are not equal validation of every build/platform/combination. Historical RC2/RC3 records below retain their dates and scope; this documentation revision does not rerun functional or Desktop acceptance.
+- Package **0.1.4** declares DSH `0.2.1-rc.2 || 0.2.1-rc.3 || 0.2.1-rc.5 || 0.2.2-rc.1`; Node **22+**.
+- Current published target: Windows x64 DSH Desktop **0.2.2-rc.1**. See [v0.1.4 Release](https://github.com/379385796-sys/dsh-ai-exporter/releases/tag/v0.1.4).
+- 声明接受范围不等于每个版本、平台及第三方组合都完成同等验收。下面的 RC2/RC3/RC5 测试数量与安装状态是对应日期的历史记录。
+- Declared ranges are not equal validation of every build/platform/combination. Historical RC2/RC3/RC5 records below retain their dates and scope.
 - Linux/macOS and arbitrary host builds remain untested.
+
+## 0.1.4 — 0.2.2-rc.1 compatibility (2026-11-05)
+
+Target: DSH Desktop 0.2.2-rc.1, Windows x64, Electron 44 / Node 24.21.0. Exact host range: `0.2.1-rc.2 || 0.2.1-rc.3 || 0.2.1-rc.5 || 0.2.2-rc.1`.
+
+0.2.2-rc.1 evaluates `engines.dsh` before importing plugin code and skips a bundle whose range does not satisfy the running host, so 0.1.3 could not load at all on that host. This release adds the version declaration; no exporter source changed.
+
+Evidence from the real 0.2.2-rc.1 runtime:
+
+- Session format is still V4 and the known-event catalogue is unchanged; replay produced 4 messages / 2 rounds with `complete: true` and zero diagnostics for a two-turn Chinese session.
+- `sessionQuery.readSession` and `listSessions` signatures are unchanged; persisted sessions stayed readable after a host restart (message counts 4/4/2/2/2 across seven sessions).
+- `connection.fetch.register` contract is unchanged; the exact `/api/ai-exporter.*` routes answered through the owner fetch handler.
+- TXT/Markdown/PDF output preserved Chinese text, Markdown headings, tables, code fences and emoji; a single-format PDF export produced a valid 3-page `%PDF-1.4` file.
+- Round filtering (`range: "2"` → 2 messages), exclusive no-overwrite naming (`name (1).md`) and single-use grants (replay rejected with 保存位置授权已失效) all behave as before.
+- Typed/pasted directory normalization still accepts a quoted, space-padded Windows path and still rejects a relative one.
+- 73 automated regressions pass.
 
 ## 历史验证记录 / Historical validation records
 
