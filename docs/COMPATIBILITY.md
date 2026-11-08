@@ -2,11 +2,19 @@
 
 ## 当前范围 / Current scope
 
-- Package **0.1.4** declares DSH `0.2.1-rc.2 || 0.2.1-rc.3 || 0.2.1-rc.5 || 0.2.2-rc.1`; Node **22+**.
-- Current published target: Windows x64 DSH Desktop **0.2.2-rc.1**. See [v0.1.4 Release](https://github.com/379385796-sys/dsh-ai-exporter/releases/tag/v0.1.4).
+- Package **0.1.5** declares DSH `0.2.1-rc.2 || 0.2.1-rc.3 || 0.2.1-rc.5 || 0.2.2-rc.1`; Node **22+**.
+- Current target: Windows x64 DSH Desktop **0.2.2-rc.1**. See [v0.1.5 Release](https://github.com/379385796-sys/dsh-ai-exporter/releases/tag/v0.1.5).
 - 声明接受范围不等于每个版本、平台及第三方组合都完成同等验收。下面的 RC2/RC3/RC5 测试数量与安装状态是对应日期的历史记录。
 - Declared ranges are not equal validation of every build/platform/combination. Historical RC2/RC3/RC5 records below retain their dates and scope.
 - Linux/macOS and arbitrary host builds remain untested.
+
+## 0.1.5 — snapshot isolation and UI (2026-11-09)
+
+Real React/Edge tests cover late responses/errors, history selection, reload/close, exact-snapshot consent, submitted-task survival, explicit cancellation, English, narrow layout, keyboard focus and reduced motion. Native Fork fixtures come from the shipped 0.2.2-rc.1 `buildForkSeed` with synthetic inputs, including inherited prefixes, open assistant/tool tails, retry, compaction and nested forks. No replay algorithm was changed.
+
+These checks use isolated synthetic data. They do not certify private sessions, all historical hosts or every theme/plugin combination. Readable-body completeness does not mean all raw records or attachment bytes were exported. A changed snapshot requires re-reading before export.
+
+The 0.1.5 regression run passed 87 tests under Electron's Node 24.21.0, including real isolated TXT/Markdown/PDF output, cancellation, failure cleanup and no-overwrite authorization. The actual 0.2.2-rc.1 host loaded the localized export slot, read synthetic snapshots and displayed light/dark dialogs at 900/640/360px with reduced-motion and keyboard dismissal. Native Windows Save As was observed, but automated confirmation was not completed; no private session export was performed.
 
 ## 0.1.4 — 0.2.2-rc.1 compatibility (2026-11-05)
 

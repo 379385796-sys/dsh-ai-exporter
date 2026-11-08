@@ -1,4 +1,4 @@
-import {getTranscript,listSessions} from './adapter.js';
+import {getTranscript,listSessions,assertReviewedSnapshot} from './adapter.js';
 import {exportTranscript} from './exporter.js';
 import {DestinationGrants} from './destinations.js';
 export const name='dsh-ai-exporter';
@@ -27,7 +27,7 @@ export function apply(ctx) {
     const destination=destinations.consume(body.grant,body.sessionId,body.formats);
     const abort=new AbortController(),id=globalThis.crypto.randomUUID(),job={abort,status:'running',progress:'读取完整会话',created:Date.now()};jobs.set(id,job);
     const options={outputDir:destination.outputDir,fileStem:destination.fileStem,tempDirectory:process.env.DSH_EXPORTER_TEMP,formats:body.formats,range:body.range,timestamps:body.timestamps!==false,models:body.models===true,allowPartial:body.allowPartial===true,bom:true,newline:'crlf',timeZone:'Australia/Sydney',signal:abort.signal,onProgress:text=>job.progress=text};
-    void (async()=>{try{const t=await getTranscript(ctx,body.sessionId,abort.signal);job.result=await exportTranscript(t,options);job.status='done';}catch(e){job.status=abort.signal.aborted?'cancelled':'error';job.error=e.message;job.completedFiles=e.completedFiles??[];job.cleanupWarnings=e.cleanupWarnings??[];}finally{job.finished=Date.now();}})();
+    void (async()=>{try{const t=await getTranscript(ctx,body.sessionId,abort.signal);assertReviewedSnapshot(t,body.reviewedSnapshot);job.result=await exportTranscript(t,options);job.status='done';}catch(e){job.status=abort.signal.aborted?'cancelled':'error';job.error=e.message;job.completedFiles=e.completedFiles??[];job.cleanupWarnings=e.cleanupWarnings??[];}finally{job.finished=Date.now();}})();
     // Finished jobs expire; browser can consume the result or cancel independently of its HTTP fetch.
     for(const [key,value] of jobs)if(value.finished&&Date.now()-value.finished>300000)jobs.delete(key);
     return Response.json({id});

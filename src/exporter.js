@@ -16,7 +16,7 @@ export async function exportTranscript(transcript,options) {
       const data=f==='txt'?renderText(selected,o):f==='md'?renderMarkdown(selected,o):await (await import('./pdf-isolated.js')).renderPdfIsolated(selected,o);
       files.push(await saveExclusive(root,stem,f,data,o.signal));
     }
-    const report={schemaVersion:1,exportedAt:new Date(at).toISOString(),sessionId:transcript.id,capturedThroughSeq:transcript.capturedThroughSeq,messages:selected.messages.length,sourceStats:transcript.stats,complete:transcript.complete,diagnostics:transcript.diagnostics,files,cleanupWarnings};
+    const report={schemaVersion:1,scope:{projection:'readable-bodies',reasoning:false,rawTools:false,attachmentFiles:false,attachmentReferences:true},exportedAt:new Date(at).toISOString(),sessionId:transcript.id,capturedThroughSeq:transcript.capturedThroughSeq,messages:selected.messages.length,sourceStats:transcript.stats,complete:transcript.complete,diagnostics:transcript.diagnostics,files,cleanupWarnings};
     const reportFile=await saveExclusive(root,stem+'.report','json',JSON.stringify(report,null,2),o.signal);
     return {...report,reportFile};
   }catch(error){error.completedFiles=files;error.cleanupWarnings=[...cleanupWarnings,...(error.cleanupWarnings??[])];throw error;}

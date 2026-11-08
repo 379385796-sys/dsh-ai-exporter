@@ -15,7 +15,7 @@ function bodyHtml(message) {
 }
 export function dateText(value,zone='Australia/Sydney') {if(!Number.isFinite(+new Date(value)))return '';return new Intl.DateTimeFormat('sv-SE',{timeZone:zone,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).format(new Date(value));}
 export function label(m,o={}) {return `[${String(m.index).padStart(3,'0')}] ${m.role==='user'?'用户':'AI'}${o.timestamps!==false&&m.time?` | ${dateText(m.time,o.timeZone)}`:''}${o.models&&m.model?` | ${m.model}`:''}`;}
-function metadata(t,o) {return `会话：${t.title}\n导出时间：${dateText(o.exportedAt??Date.now(),o.timeZone)}\n时区：${o.timeZone??'Australia/Sydney'}\n消息：${t.messages.length}${t.selection?` | 轮次：${t.selection}`:''}${!t.complete?'\n注意：含未支持内容，详见导出诊断。':''}`;}
+function metadata(t,o) {return `会话：${t.title}\n导出时间：${dateText(o.exportedAt??Date.now(),o.timeZone)}\n时区：${o.timeZone??'Australia/Sydney'}\n消息：${t.messages.length}${t.selection?` | 轮次：${t.selection}`:''}\n范围：可读正文；不含思考、工具原始记录和附件文件（readable bodies only; no reasoning, raw tools or attachment files）。${!t.complete?'\n注意：含未支持内容，详见导出诊断。':''}`;}
 const textMd=new MarkdownIt({html:false,linkify:false,typographer:false});
 textMd.inline.ruler.before('text','windows_path',(state,silent)=>{
   const rest=state.src.slice(state.pos,state.posMax);

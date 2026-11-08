@@ -1,6 +1,6 @@
 # 对话导出 · DSH AI Exporter
 
-[English](README.en.md) · [下载 v0.1.3](https://github.com/379385796-sys/dsh-ai-exporter/releases/tag/v0.1.3) · [兼容记录](docs/COMPATIBILITY.md)
+[English](README.en.md) · [下载 v0.1.5](https://github.com/379385796-sys/dsh-ai-exporter/releases/tag/v0.1.5) · [兼容记录](docs/COMPATIBILITY.md)
 
 将 DSH 当前或历史对话导出为 **TXT、Markdown 和可搜索 PDF**，用于本地阅读、检索和整理。导出在本机完成，不上传聊天正文。
 
@@ -12,15 +12,17 @@
 - 输入、粘贴或浏览本地目录，通过 Windows 原生窗口确认；记住最近目录，保留单一格式的“另存为”。已有文件不会被覆盖。
 - 识别已支持的撤回事件并过滤内部内容；遇到未知事件或未完成回复时给出诊断，默认阻止不完整导出。
 
-附件只保留说明，不读取或嵌入附件；数学与 Mermaid 保留原文，不保证无损转换。导出文件不能用于恢复 DSH 环境。
+导出范围是**可读消息正文**：不含思考、工具原始记录和内部上下文；附件及交付物仅保留引用，不读取或嵌入文件。数学与 Mermaid 保留原文，不保证无损转换。这不是原始会话全量备份，不能用于恢复 DSH 环境。
+
+**0.1.5 更新：** 切换、刷新和关闭时安全丢弃旧预览；部分导出同意绑定已审阅快照，数据变化后需重新读取。弹窗使用原生主题控件反馈，支持中文、英文和减少动态效果。[更新记录](CHANGELOG.md)
 
 ## 安装
 
-当前版本 **0.1.4**，面向 Windows DSH Desktop。包声明接受 `0.2.1-rc.2 || 0.2.1-rc.3 || 0.2.1-rc.5 || 0.2.2-rc.1`，Node 要求 **22+**。当前 0.2.2-rc.1、历史 RC5/RC2/RC3 验证的区别见[兼容记录](docs/COMPATIBILITY.md)；其他平台未验证。
+当前版本 **0.1.5**，面向 Windows DSH Desktop。包声明接受 `0.2.1-rc.2 || 0.2.1-rc.3 || 0.2.1-rc.5 || 0.2.2-rc.1`，Node 要求 **22+**。当前 0.2.2-rc.1、历史 RC5/RC2/RC3 验证的区别见[兼容记录](docs/COMPATIBILITY.md)；其他平台未验证。
 
 **PDF 另需本机已有的 Edge 或 Chrome。** 插件不附带或自动下载浏览器。找不到浏览器时，可在启动 DSH 的环境中设置 `DSH_EXPORTER_BROWSER` 为 Chromium/Chrome 可执行文件的完整路径。TXT、Markdown 不依赖 PDF 浏览器。
 
-1. 从 [v0.1.3 Release](https://github.com/379385796-sys/dsh-ai-exporter/releases/tag/v0.1.3) 下载 `dsh-ai-exporter-0.1.3.tgz` 及同名 `.sha256`，不要把 Source code ZIP 当作安装包。
+1. 从 [v0.1.5 Release](https://github.com/379385796-sys/dsh-ai-exporter/releases/tag/v0.1.5) 下载 `dsh-ai-exporter-0.1.5.tgz` 及同名 `.sha256`，不要把 Source code ZIP 当作安装包。
 2. 用 PowerShell 核对本地哈希，与校验文件中的值比较：
 
    ```powershell
@@ -33,7 +35,7 @@
    dsh plugin --profile <你的Profile> add <tgz完整路径>
    ```
 
-4. 重启 DSH，核对包名 `dsh-ai-exporter`、入口 ID `ai-exporter` 和版本 `0.1.3`。
+4. 重启 DSH，核对包名 `dsh-ai-exporter`、入口 ID `ai-exporter` 和版本 `0.1.5`。
 
 升级前保留配置与旧包，使用官方插件安装入口，无需手改 `node_modules` 或 `app.asar`。
 
@@ -46,6 +48,8 @@
 5. 等待任务完成，按结果中的路径打开文件。
 
 手输目录仍需原生确认；无效目录会阻止导出。保存授权仅使用一次，会话、格式或路径变化后需要重新确认。只接受本地 Windows 绝对路径，不支持 UNC/网络路径。
+
+导出前会再次核对快照；会话发生变化时会停止并要求重新读取。关闭或切换预览不会取消已提交的服务端任务，取消导出请使用任务中的“取消导出”。卸载插件或退出 DSH 仍会停止其任务。
 
 ## 常见问题
 
@@ -72,10 +76,12 @@ npm run check
 
 ## 界面资料与许可
 
-现有插件管理器卡片仅展示安装识别信息，不代表导出面板：
+DSH Desktop 0.2.2-rc.1 中的实际弹窗，使用隔离合成会话：
+
+![导出弹窗浅色主题](assets/export-dialog-light.png)
+
+[查看深色主题](assets/export-dialog-dark.png)。插件管理器中的识别卡片：
 
 ![中文插件管理器卡片](assets/manager-zh.png)
-
-后续建议补充脱敏的导出面板与中文 PDF 示例，并标明实际宿主版本。
 
 独立维护的 DSH 插件。许可见 [MIT](LICENSE)，复用代码与依赖署名见[第三方声明](THIRD_PARTY_NOTICES.md)。

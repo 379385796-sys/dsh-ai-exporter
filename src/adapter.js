@@ -1,4 +1,12 @@
 import {TranscriptReplay,LIMITS} from './core.js';
+import {createHash} from 'node:crypto';
+/** Bind a reviewed projection to its exact content and diagnostics. */
+export function reviewedSnapshot(transcript) {
+  return createHash('sha256').update(JSON.stringify(transcript)).digest('hex');
+}
+export function assertReviewedSnapshot(transcript,key) {
+  if(typeof key!=='string'||key!==transcript.snapshotKey)throw Error('会话数据已变化，请重新读取并检查诊断 / Session changed; reload and review diagnostics');
+}
 /** This is the only module that knows DSH's host query contract. */
 export async function getTranscript(ctx,id,signal) {
   if(typeof id!=='string'||!/^[-\w]{1,180}$/.test(id))throw Error('无效会话 ID');
@@ -8,6 +16,7 @@ export async function getTranscript(ctx,id,signal) {
   if(events.length>LIMITS.events)throw Error('会话事件数量超过安全上限');
   const r=new TranscriptReplay(session,{signal});let bytes=0;
   for(let i=0;i<events.length;i++){bytes+=Buffer.byteLength(JSON.stringify(events[i]));if(bytes>LIMITS.bytes)throw Error('会话超过 64 MiB 安全上限');r.push(events[i]);if(i%200===0)await new Promise(done=>setImmediate(done));}
-  return r.finish();
+  const transcript=r.finish();
+  return {...transcript,snapshotKey:reviewedSnapshot(transcript)};
 }
 export async function listSessions(ctx,signal) {const query=ctx.get('sessionQuery');if(typeof query?.listSessions!=='function')throw Error('会话查询服务不可用');const records=await query.listSessions(signal);return records.map(r=>({id:r.header.id,createdAt:r.header.createdAt,live:r.live}));}
