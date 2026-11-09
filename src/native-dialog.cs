@@ -55,9 +55,14 @@ internal static class NativeDialog {
       if(dialog!=null)Marshal.ReleaseComObject(dialog);
     }
   }
-  private static void Trace(string phase){if(Environment.GetEnvironmentVariable("DSH_EXPORTER_NATIVE_DEBUG")=="1")File.AppendAllText(Path.Combine(Path.GetTempPath(),"dsh-native-"+Process.GetCurrentProcess().Id+".log"),phase+"\n");}
   [STAThread]
-  private static int Main() {
+  private static int Main(string[] args) {
+    if(args.Length==1 && args[0]=="--prune-debug"){NativeTrace.Prune();return 0;}
+    if(args.Length!=0)return 1;
+    using(var trace=NativeTrace.Start()) return RunDialog(trace);
+  }
+  private static int RunDialog(NativeTrace trace) {
+    Action<string> Trace=phase=>{if(trace!=null)trace.Phase(phase);};
     Trace("start");
     var serializer = new JavaScriptSerializer();
     using (var output = new StreamWriter(Console.OpenStandardOutput(), new UTF8Encoding(false))) {

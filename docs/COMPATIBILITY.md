@@ -2,11 +2,15 @@
 
 ## 当前范围 / Current scope
 
-- Package **0.1.5** declares DSH `0.2.1-rc.2 || 0.2.1-rc.3 || 0.2.1-rc.5 || 0.2.2-rc.1`; Node **22+**.
-- Current target: Windows x64 DSH Desktop **0.2.2-rc.1**. See [v0.1.5 Release](https://github.com/379385796-sys/dsh-ai-exporter/releases/tag/v0.1.5).
+- Package **0.1.6** declares DSH `0.2.1-rc.2 || 0.2.1-rc.3 || 0.2.1-rc.5 || 0.2.2-rc.1`; Node **22+**.
+- Current target: Windows x64 DSH Desktop **0.2.2-rc.1**. See [v0.1.6 Release](https://github.com/379385796-sys/dsh-ai-exporter/releases/tag/v0.1.6).
 - 声明接受范围不等于每个版本、平台及第三方组合都完成同等验收。下面的 RC2/RC3/RC5 测试数量与安装状态是对应日期的历史记录。
 - Declared ranges are not equal validation of every build/platform/combination. Historical RC2/RC3/RC5 records below retain their dates and scope.
 - Linux/macOS and arbitrary host builds remain untested.
+
+## 0.1.6 — native trace retention (2026-11-09)
+
+The optional `DSH_EXPORTER_NATIVE_DEBUG=1` trace uses `%TEMP%\dsh-ai-exporter-native-debug-v1`. Windows startup and daily checks remove closed, identifiable logs at 10 days. Older unmarked logs and PDF directories without ownership or end evidence are retained. User-selected TXT, Markdown, PDF and export reports remain outside retention.
 
 ## 0.1.5 — snapshot isolation and UI (2026-11-09)
 

@@ -1,6 +1,6 @@
 # DSH AI Exporter
 
-[简体中文](README.md) · [Download v0.1.5](https://github.com/379385796-sys/dsh-ai-exporter/releases/tag/v0.1.5) · [Compatibility](docs/COMPATIBILITY.md)
+[简体中文](README.md) · [Download v0.1.6](https://github.com/379385796-sys/dsh-ai-exporter/releases/tag/v0.1.6) · [Compatibility](docs/COMPATIBILITY.md)
 
 Export current or historical DSH conversations as **TXT, Markdown, and searchable PDF** for local reading and reference. Conversion runs locally without uploading conversation text.
 
@@ -14,15 +14,15 @@ Export current or historical DSH conversations as **TXT, Markdown, and searchabl
 
 Exports contain **readable message bodies**, without reasoning, raw tool records or internal context. Attachments and deliverables remain references; their files are never read or embedded. Math and Mermaid remain source text. This is not a full raw-session backup and cannot restore a DSH environment.
 
-**New in 0.1.5:** stale previews are discarded on switching, reloading and closing. Partial-export consent applies only to the reviewed snapshot; changed data requires another review. The dialog follows native theme controls, supports Chinese and English, and respects reduced motion. [Changelog](CHANGELOG.md)
+**New in 0.1.6** — optional Windows chooser traces expire after 10 days. [Changelog](CHANGELOG.md)
 
 ## Installation
 
-Current version: **0.1.5**, targeting Windows DSH Desktop. The package declares `0.2.1-rc.2 || 0.2.1-rc.3 || 0.2.1-rc.5 || 0.2.2-rc.1` and Node **22+**. See [compatibility](docs/COMPATIBILITY.md) for current 0.2.2-rc.1 and historical RC5/RC2/RC3 evidence. Other platforms are untested.
+Current version: **0.1.6**, targeting Windows DSH Desktop. The package declares `0.2.1-rc.2 || 0.2.1-rc.3 || 0.2.1-rc.5 || 0.2.2-rc.1` and Node **22+**. See [compatibility](docs/COMPATIBILITY.md) for current 0.2.2-rc.1 and historical RC5/RC2/RC3 evidence. Other platforms are untested.
 
 **PDF requires an existing Edge or Chrome installation.** No browser is bundled or automatically downloaded. If detection fails, set `DSH_EXPORTER_BROWSER` to a Chromium/Chrome executable's absolute path in the environment that starts DSH. TXT and Markdown do not require the PDF browser.
 
-1. Download `dsh-ai-exporter-0.1.5.tgz` and its `.sha256` from [v0.1.5](https://github.com/379385796-sys/dsh-ai-exporter/releases/tag/v0.1.5). Source code ZIP is not the installable package.
+1. Download `dsh-ai-exporter-0.1.6.tgz` and its `.sha256` from [v0.1.6](https://github.com/379385796-sys/dsh-ai-exporter/releases/tag/v0.1.6). Source code ZIP is not the installable package.
 2. Compare the local SHA-256 with the supplied checksum:
 
    ```powershell
@@ -35,7 +35,7 @@ Current version: **0.1.5**, targeting Windows DSH Desktop. The package declares 
    dsh plugin --profile <profile> add <absolute-tgz-path>
    ```
 
-4. Restart DSH and verify package `dsh-ai-exporter`, entry ID `ai-exporter`, and version `0.1.5`.
+4. Restart DSH and verify package `dsh-ai-exporter`, entry ID `ai-exporter`, and version `0.1.6`.
 
 Keep configuration and the previous package before upgrading. Use the official installer without editing installed dependencies or host archives.
 

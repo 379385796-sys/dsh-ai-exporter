@@ -1,6 +1,7 @@
 import {getTranscript,listSessions,assertReviewedSnapshot} from './adapter.js';
 import {exportTranscript} from './exporter.js';
 import {DestinationGrants} from './destinations.js';
+import {startNativeTraceRetention} from './native-dialog.js';
 export const name='dsh-ai-exporter';
 export const inject=['connection','sessionQuery'];
 // The official HTTP bridge normalizes Request.url to http://dsh.internal;
@@ -9,6 +10,7 @@ export function validOrigin(request){const origin=request.headers.get('origin');
 /** Owner-only exact Fetch routes, authenticated by DSH Connection. No arbitrary read API. */
 export function apply(ctx) {
   const jobs=new Map(),destinations=new DestinationGrants(),lifetime=new AbortController();let disposed=false;
+  ctx.effect(startNativeTraceRetention,'ai-exporter native trace retention');
   ctx.effect(()=>()=>{disposed=true;lifetime.abort();for(const j of jobs.values())j.abort.abort();jobs.clear();destinations.grants.clear();},'ai-exporter job lifecycle');
   const route=(path,methods,fetch)=>ctx.connection.fetch.register({path:'/api/ai-exporter.'+path,methods,requestBody:'buffered',fetch:async request=>{try{if(disposed)throw Error('插件已卸载');if(request.method==='POST'){if(!validOrigin(request))throw Error('拒绝跨站导出请求');if(!request.headers.get('content-type')?.startsWith('application/json'))throw Error('需要 JSON 请求');}return await fetch(request);}catch(e){return Response.json({error:e.message},{status:400,headers:{'cache-control':'no-store'}});}}});
   route('snapshot',['GET'],async request=>Response.json(await getTranscript(ctx,new URL(request.url).searchParams.get('sessionId'),request.signal),{headers:{'cache-control':'no-store'}}));

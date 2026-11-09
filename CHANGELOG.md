@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.6 — 2026-11-09
+
+- 现有可选 Windows 原生选择器调试日志使用专属目录。插件启动及每 24 小时清理满 10 天的已关闭日志，使用文件句柄验证归属和占用，遇到权限错误留待下次检查。
+- The opt-in Windows chooser trace now uses a dedicated directory. Startup and daily checks expire closed, identifiable traces after 10 days. Normal PDF scratch cleanup and saved exports use their existing lifecycle.
+
 ## 0.1.5 — 2026-11-09
 
 - 修复切换、历史选择、刷新、关闭和卸载后的过期预览／错误覆盖；读取与独立导出任务分别管理。
