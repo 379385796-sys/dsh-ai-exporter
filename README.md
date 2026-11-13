@@ -1,6 +1,6 @@
 # 对话导出 · DSH AI Exporter
 
-[English](README.en.md) · [下载 v0.1.6](https://github.com/379385796-sys/dsh-ai-exporter/releases/tag/v0.1.6) · [兼容记录](docs/COMPATIBILITY.md)
+[English](README.en.md) · [下载 v0.1.7](https://github.com/379385796-sys/dsh-ai-exporter/releases/tag/v0.1.7) · [兼容记录](docs/COMPATIBILITY.md)
 
 将 DSH 当前或历史对话导出为 **TXT、Markdown 和可搜索 PDF**，用于本地阅读、检索和整理。导出在本机完成，不上传聊天正文。
 
@@ -14,15 +14,15 @@
 
 导出范围是**可读消息正文**：不含思考、工具原始记录和内部上下文；附件及交付物仅保留引用，不读取或嵌入文件。数学与 Mermaid 保留原文，不保证无损转换。这不是原始会话全量备份，不能用于恢复 DSH 环境。
 
-**0.1.6** 为可选的 Windows 原生选择器调试日志加入 10 天保留期。 [更新记录](CHANGELOG.md)
+**0.1.7** 兼容 DSH 0.2.2-rc.3；导出、界面与隐私过滤均未改动。[更新记录](CHANGELOG.md)
 
 ## 安装
 
-当前版本 **0.1.6**，面向 Windows DSH Desktop。包声明接受 `0.2.1-rc.2 || 0.2.1-rc.3 || 0.2.1-rc.5 || 0.2.2-rc.1`，Node 要求 **22+**。当前 0.2.2-rc.1、历史 RC5/RC2/RC3 验证的区别见[兼容记录](docs/COMPATIBILITY.md)；其他平台未验证。
+当前版本 **0.1.7**，面向 Windows DSH Desktop。包声明接受 `0.2.1-rc.2 || 0.2.1-rc.3 || 0.2.1-rc.5 || 0.2.2-rc.1 || 0.2.2-rc.3`，Node 要求 **22+**。当前目标 0.2.2-rc.3 与历史 rc.1／RC5／RC2／RC3 的验证差别见[兼容记录](docs/COMPATIBILITY.md)；其他平台未验证。
 
 **PDF 另需本机已有的 Edge 或 Chrome。** 插件不附带或自动下载浏览器。找不到浏览器时，可在启动 DSH 的环境中设置 `DSH_EXPORTER_BROWSER` 为 Chromium/Chrome 可执行文件的完整路径。TXT、Markdown 不依赖 PDF 浏览器。
 
-1. 从 [v0.1.6 Release](https://github.com/379385796-sys/dsh-ai-exporter/releases/tag/v0.1.6) 下载 `dsh-ai-exporter-0.1.6.tgz` 及同名 `.sha256`，不要把 Source code ZIP 当作安装包。
+1. 从 [v0.1.7 Release](https://github.com/379385796-sys/dsh-ai-exporter/releases/tag/v0.1.7) 下载 `dsh-ai-exporter-0.1.7.tgz` 及同名 `.sha256`，不要把 Source code ZIP 当作安装包。
 2. 用 PowerShell 核对本地哈希，与校验文件中的值比较：
 
    ```powershell
@@ -35,7 +35,7 @@
    dsh plugin --profile <你的Profile> add <tgz完整路径>
    ```
 
-4. 重启 DSH，核对包名 `dsh-ai-exporter`、入口 ID `ai-exporter` 和版本 `0.1.6`。
+4. 重启 DSH，核对包名 `dsh-ai-exporter`、入口 ID `ai-exporter` 和版本 `0.1.7`。
 
 升级前保留配置与旧包，使用官方插件安装入口，无需手改 `node_modules` 或 `app.asar`。
 

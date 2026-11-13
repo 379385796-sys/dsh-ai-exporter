@@ -2,11 +2,27 @@
 
 ## 当前范围 / Current scope
 
-- Package **0.1.6** declares DSH `0.2.1-rc.2 || 0.2.1-rc.3 || 0.2.1-rc.5 || 0.2.2-rc.1`; Node **22+**.
-- Current target: Windows x64 DSH Desktop **0.2.2-rc.1**. See [v0.1.6 Release](https://github.com/379385796-sys/dsh-ai-exporter/releases/tag/v0.1.6).
+- Package **0.1.7** declares DSH `0.2.1-rc.2 || 0.2.1-rc.3 || 0.2.1-rc.5 || 0.2.2-rc.1 || 0.2.2-rc.3`; Node **22+**.
+- Current target: Windows x64 DSH Desktop **0.2.2-rc.3**. See [v0.1.7 Release](https://github.com/379385796-sys/dsh-ai-exporter/releases/tag/v0.1.7).
 - 声明接受范围不等于每个版本、平台及第三方组合都完成同等验收。下面的 RC2/RC3/RC5 测试数量与安装状态是对应日期的历史记录。
 - Declared ranges are not equal validation of every build/platform/combination. Historical RC2/RC3/RC5 records below retain their dates and scope.
 - Linux/macOS and arbitrary host builds remain untested.
+
+## 0.1.7 — 0.2.2-rc.3 (2026-11-13)
+
+Target: Windows x64 DSH Desktop 0.2.2-rc.3. `engines.dsh` now lists `0.2.2-rc.3`, so the host no longer skips the plugin at boot; every earlier entry is retained.
+
+This release changes declarations only. Verified against the installed 0.2.2-rc.3 app:
+
+- `dsh-session-query` still exposes `listSessions(signal?)` and `readSession(id)` → `{ session, inheritedEventCount, events }`, and `SessionRecord` still carries `header`, `live`, `persisted`. The adapter's `readSession` destructuring and its `header.id`/`header.createdAt`/`live` reads are unchanged.
+- Session reading stays read-only: the plugin never appends events, so the `Session.append` overload change does not apply.
+- `runtime-context` records are still recognised as surface operations and the export filter remains `source.kind === 'user'`; the rc.1 `<system-reminder>` wrapping does not change what is exported.
+- Fingerprints, destinations, native grants and retention rules are untouched; the PDF path still needs an existing Edge/Chrome.
+
+### Evidence
+
+- Source-level check of the installed host packages for the APIs above; no code change was needed.
+- Load check in the rc.3 Profile after installation; unit tests were not rerun because `lib/` is byte-identical to 0.1.6.
 
 ## 0.1.6 — native trace retention (2026-11-09)
 

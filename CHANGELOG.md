@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.1.7 — 2026-11-13
+
+- 在宿主范围中加入 Windows Desktop **0.2.2-rc.3**；此前声明的 `0.2.1-rc.2`、`0.2.1-rc.3`、`0.2.1-rc.5`、`0.2.2-rc.1` 保留不变。
+- 无功能改动：0.2.2-rc.3 的会话读取接口（`listSessions`／`readSession` 返回 `{ session, inheritedEventCount, events }`）、`sessionQuery` 服务与 `runtime-context` 事件形态均未变化；正文筛选仍只导出 `source.kind === 'user'` 的记录，rc.1 起被包裹的 `<system-reminder>` 运行时上下文不会进入导出。
+- 定向验证：对照当前 0.2.2-rc.3 安装中的 `dsh-session-query` 与 `dsh-app-boot` 源确认接口与加载规则；插件装入 rc.3 Profile 后由宿主正常加载。
+- 未重跑单元测试（`lib/` 与 0.1.6 逐字节一致），本版只改版本声明与文档。
+
+- Add Windows Desktop **0.2.2-rc.3** to the declared host range; `0.2.1-rc.2`, `0.2.1-rc.3`, `0.2.1-rc.5` and `0.2.2-rc.1` are retained.
+- No functional change: 0.2.2-rc.3 keeps the session read contract (`listSessions`/`readSession` returning `{ session, inheritedEventCount, events }`), the `sessionQuery` service and the `runtime-context` event shape; the body filter still exports only `source.kind === 'user'` records, so the `<system-reminder>`-wrapped runtime context introduced in rc.1 cannot reach an export.
+- Targeted verification: checked the `dsh-session-query` and `dsh-app-boot` sources in the installed 0.2.2-rc.3 app for the API and load rules; the plugin loads normally after installation into the rc.3 Profile.
+- Unit tests were not rerun (`lib/` is byte-identical to 0.1.6); this release changes version declarations and docs only.
+
 ## 0.1.6 — 2026-11-09
 
 - 现有可选 Windows 原生选择器调试日志使用专属目录。插件启动及每 24 小时清理满 10 天的已关闭日志，使用文件句柄验证归属和占用，遇到权限错误留待下次检查。
