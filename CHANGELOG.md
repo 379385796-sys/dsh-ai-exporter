@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.1.8 — 2026-11-19
+
+- 在宿主范围中加入 Windows Desktop **0.2.2-rc.5**；此前声明的 `0.2.1-rc.2`、`0.2.1-rc.3`、`0.2.1-rc.5`、`0.2.2-rc.1`、`0.2.2-rc.3` 保留不变。
+- 纯声明变更：0.1.7 的 `engines.dsh` 不含 rc.5，宿主会按兼容性门禁在启动时静默跳过本插件；本版只补声明，行为与 0.1.7 完全一致，`lib/` 产物不变。
+- 定向验证：对照当前 0.2.2-rc.5 安装确认 `sessionQuery.listSessions`／`readSession`、`connection.fetch.register`、`locale.register`、`slots.inject`／`register` 以及 `conversation.session.header.utilities` 插槽均仍存在且签名未变。
+- 重跑 `node --test tests/*.test.mjs`（88 个用例）全部通过，包括真实 Edge PDF 导出与 React/Edge 客户端回归；`lib/` 与 0.1.7 逐字节一致。
+
+- Add Windows Desktop **0.2.2-rc.5** to the declared host range; `0.2.1-rc.2`, `0.2.1-rc.3`, `0.2.1-rc.5`, `0.2.2-rc.1` and `0.2.2-rc.3` are retained.
+- Declaration-only change: 0.1.7's `engines.dsh` did not name rc.5, so that host skipped the plugin silently at boot; this release adds the declaration only. Behaviour is identical to 0.1.7 and `lib/` is unchanged.
+- Targeted verification against the installed 0.2.2-rc.5 app: `sessionQuery.listSessions`/`readSession`, `connection.fetch.register`, `locale.register`, `slots.inject`/`register` and the `conversation.session.header.utilities` slot are all still present with unchanged signatures.
+- Reran the full `node --test tests/*.test.mjs` suite (88 tests) — all pass, including the real Edge PDF export and the React/Edge client regression; `lib/` is byte-identical to 0.1.7.
+
 ## 0.1.7 — 2026-11-13
 
 - 在宿主范围中加入 Windows Desktop **0.2.2-rc.3**；此前声明的 `0.2.1-rc.2`、`0.2.1-rc.3`、`0.2.1-rc.5`、`0.2.2-rc.1` 保留不变。

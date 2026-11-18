@@ -2,11 +2,28 @@
 
 ## 当前范围 / Current scope
 
-- Package **0.1.7** declares DSH `0.2.1-rc.2 || 0.2.1-rc.3 || 0.2.1-rc.5 || 0.2.2-rc.1 || 0.2.2-rc.3`; Node **22+**.
-- Current target: Windows x64 DSH Desktop **0.2.2-rc.3**. See [v0.1.7 Release](https://github.com/379385796-sys/dsh-ai-exporter/releases/tag/v0.1.7).
+- Package **0.1.8** declares DSH `0.2.1-rc.2 || 0.2.1-rc.3 || 0.2.1-rc.5 || 0.2.2-rc.1 || 0.2.2-rc.3 || 0.2.2-rc.5`; Node **22+**.
+- Current target: Windows x64 DSH Desktop **0.2.2-rc.5**. See [v0.1.8 Release](https://github.com/379385796-sys/dsh-ai-exporter/releases/tag/v0.1.8).
 - 声明接受范围不等于每个版本、平台及第三方组合都完成同等验收。下面的 RC2/RC3/RC5 测试数量与安装状态是对应日期的历史记录。
 - Declared ranges are not equal validation of every build/platform/combination. Historical RC2/RC3/RC5 records below retain their dates and scope.
 - Linux/macOS and arbitrary host builds remain untested.
+
+## 0.1.8 — 0.2.2-rc.5 (2026-11-19)
+
+Target: Windows x64 DSH Desktop 0.2.2-rc.5. `engines.dsh` now lists `0.2.2-rc.5`; every earlier entry is retained. 0.1.7 stopped at `0.2.2-rc.3`, so the rc.5 host skipped the plugin at boot.
+
+This release changes declarations only. Verified against the installed 0.2.2-rc.5 app:
+
+- `dsh-session-query` still exposes `listSessions(signal?)` and `readSession(id)` → `{ session, inheritedEventCount, events }`; the adapter's `readSession` destructuring and its `header.id`/`header.createdAt`/`live` reads are unchanged.
+- `ctx.connection.fetch.register({ path, methods, requestBody, fetch })` and `HostConnectionService` are unchanged, so the exact `/api/ai-exporter.*` Fetch routes still register.
+- Client-side host services are unchanged: `locale.register(scope, dictionary)`, `slots.inject(name, callback)` and `slots.register({ name, id, locale, order }, component)` still exist, and `dsh-client-ui-conversation` 0.2.2-rc.5 still declares the `conversation.session.header.utilities` slot.
+- The rc.3 → rc.5 host diff touches only `dsh-llm`, `cordis-plugin-loader`, `cordis-plugin-include` and `cordis-plugin-timer`; the packages this plugin uses are identical apart from their version fields.
+
+### Evidence
+
+- Source-level check of the installed rc.5 host packages and the rc.5 service catalog for every API above; no code change was needed.
+- `lib/` is byte-identical to 0.1.7. `node --check` passes on all five entry files, and the full `node --test tests/*.test.mjs` suite passes (88 tests, 0 failures, Node 26.12.1), including the real Edge PDF export and the React/Edge client regression against the shipped `lib/client.js`.
+- The `dsh-app-boot` gate, evaluated with the host's bundled `semver` 2.0.0 (`satisfies('0.2.2-rc.5', engines.dsh, { includePrerelease: true })`), returns `true`; loading in a real rc.5 Profile is verified at installation time.
 
 ## 0.1.7 — 0.2.2-rc.3 (2026-11-13)
 
